@@ -13,14 +13,36 @@ const defaultTodos = [
 ];
 
 function App() {
+  const [todos, setTodos] = React.useState(defaultTodos)
+  const [searchValue, setSearchValue] = React.useState('');
+  const completedTodos = todos.filter(todo => !!todo.completed).length;
+  const totalTodos = todos.length;
+
+  const searchedTodos = todos.filter(
+    (todo) => {
+      // función texto sin tildes
+      const noTildes = (text) => {
+        return text.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+      };
+      const todoText = noTildes(todo.text.toLowerCase());
+      const serachText = noTildes(searchValue.toLowerCase());
+      return todoText.includes(serachText);
+    }
+  );
+  
+  console.log('El usuario busco ' + searchValue);
+
   return (
     <>
 
-      <TodoCounter completed={16} total={25}  />
-      <TodoSearch />
+      <TodoCounter completed={completedTodos} total={totalTodos}  />
+      <TodoSearch 
+        searchValue={searchValue}
+        setSearchValue={setSearchValue}
+      />
 
       <TodoList>
-        {defaultTodos.map(todo => (
+        {searchedTodos.map(todo => (
           <TodoItem 
             key={todo.text} 
             text={todo.text}
