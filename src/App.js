@@ -30,7 +30,25 @@ function App() {
     }
   );
   
-  console.log('El usuario busco ' + searchValue);
+  const completeTodo = (text) => {
+    const newTodos = [...todos];
+    const todoIndex = newTodos.findIndex(
+      (todo) => todo.text == text
+    );
+    newTodos[todoIndex].completed = !
+    newTodos[todoIndex].completed;
+    setTodos(newTodos);
+  };
+  
+
+  const deleteTodo = (text) => {
+    const newTodos = [...todos];
+    const todoIndex = newTodos.findIndex(
+      (todo) => todo.text == text
+    );
+    newTodos.splice(todoIndex, 1);
+    setTodos(newTodos);
+  };
 
   return (
     <>
@@ -41,12 +59,14 @@ function App() {
         setSearchValue={setSearchValue}
       />
 
-      <TodoList>
+<TodoList>
         {searchedTodos.map(todo => (
-          <TodoItem 
-            key={todo.text} 
+          <TodoItem
+            key={todo.text}
             text={todo.text}
             completed={todo.completed}
+            onComplete={() => completeTodo(todo.text)}
+            onDelete={() => deleteTodo(todo.text)}
           />
         ))}
       </TodoList>
