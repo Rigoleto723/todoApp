@@ -46,3 +46,14 @@ function useLocalStorage(itemName, initialValue) {
 }
 
 export { useLocalStorage };
+
+// localStorage.removeItem('TODOS_V1');
+// const defaultTodos = [
+//   { text: 'Cortar Cebolla', completed: true },
+//   { text: 'Picar Tomante', completed: false },
+//   { text: 'Sofreir', completed: false },
+//   { text: 'Hecharle a la arepa', completed: false },
+// ];
+
+// localStorage.setItem('TODOS_V1', JSON.stringify(defaultTodos));
+

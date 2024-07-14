@@ -6,7 +6,7 @@ function TodoList(props) {
     <ul className='TodoList'>
         {props.children}
     </ul>
-  )
+  );
 }
 
 export { TodoList };
